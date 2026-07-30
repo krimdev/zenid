@@ -130,23 +130,6 @@ save it when you receive it, we cannot recover it, only replace it.
 
 ---
 
-## Limits worth knowing before you commit
-
-**Desktop only.** Verification needs the Primus browser extension, and browser
-extensions do not exist on mobile Chrome or Safari. Plan for users to finish on a
-laptop.
-
-**Two exchanges today.** Binance and OKX. A user with accounts on both could take
-two slots with two wallets. Restrict a campaign to a single exchange if that
-matters to you, see [docs/api.md](docs/api.md).
-
-**Lending is possible.** A verified person can verify a friend's wallet. No
-verification system solves this, ours included. What it does is make each fake
-slot cost a real KYC-verified exchange account, and leave a permanent public
-trace linking that account to the wallet.
-
----
-
 ## Docs
 
 - [docs/api.md](docs/api.md): endpoints, errors, rate limits
