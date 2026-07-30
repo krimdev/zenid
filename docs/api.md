@@ -1,8 +1,8 @@
 # API reference
 
-Base URL: `https://zenid.app`
+Base URL: `https://api.zenid.app`
 
-All endpoints under `/api/v1/` require a bearer token.
+All endpoints require a bearer token.
 
 ```
 Authorization: Bearer zen_live_...
@@ -13,7 +13,7 @@ yours we issue a new one, we cannot read the old one back.
 
 ---
 
-## `GET /api/v1/status`
+## `GET /v1/status`
 
 Whether an address has earned a slot.
 
@@ -22,7 +22,7 @@ Whether an address has earned a slot.
 | `address` | yes | EVM address, any case |
 
 ```bash
-curl 'https://zenid.app/api/v1/status?address=0x9ccD0576...' \
+curl 'https://api.zenid.app/v1/status?address=0x9ccD0576...' \
   -H 'Authorization: Bearer zen_live_...'
 ```
 
@@ -53,7 +53,7 @@ An unverified address is not an error:
 
 ---
 
-## `GET /api/v1/allowlist`
+## `GET /v1/allowlist`
 
 Every verified address. Use it to sync your own database instead of polling one
 address at a time.
@@ -63,7 +63,7 @@ address at a time.
 | `since` | no | ISO 8601. Only rows verified after this |
 
 ```bash
-curl 'https://zenid.app/api/v1/allowlist?since=2026-07-01T00:00:00Z' \
+curl 'https://api.zenid.app/v1/allowlist?since=2026-07-01T00:00:00Z' \
   -H 'Authorization: Bearer zen_live_...'
 ```
 
@@ -90,7 +90,7 @@ wallets. Nothing links those accounts, so this cannot be detected.
 If that matters for your campaign, accept a single source:
 
 ```js
-const res = await fetch(`https://zenid.app/api/v1/status?address=${address}`, {
+const res = await fetch(`https://api.zenid.app/v1/status?address=${address}`, {
   headers: { Authorization: `Bearer ${process.env.ZENID_KEY}` },
 }).then((r) => r.json());
 
@@ -123,7 +123,7 @@ Errors always carry a JSON body:
 600 requests per minute per key. Ask if you need more. The limit exists to catch
 runaway loops, not to meter you.
 
-`GET /api/v1/allowlist` with `since` costs one request whatever the row count, so
+`GET /v1/allowlist` with `since` costs one request whatever the row count, so
 prefer it over looping `status`.
 
 ---
@@ -134,7 +134,7 @@ prefer it over looping `status`.
 
 ```js
 async function isVerified(address) {
-  const r = await fetch(`https://zenid.app/api/v1/status?address=${address}`, {
+  const r = await fetch(`https://api.zenid.app/v1/status?address=${address}`, {
     headers: { Authorization: `Bearer ${process.env.ZENID_KEY}` },
   });
   if (!r.ok) throw new Error(`zenid ${r.status}`);
@@ -149,7 +149,7 @@ import os, requests
 
 def is_verified(address: str) -> bool:
     r = requests.get(
-        "https://zenid.app/api/v1/status",
+        "https://api.zenid.app/v1/status",
         params={"address": address},
         headers={"Authorization": f"Bearer {os.environ['ZENID_KEY']}"},
         timeout=10,
@@ -162,7 +162,7 @@ def is_verified(address: str) -> bool:
 
 ```js
 async function sync(since) {
-  const url = `https://zenid.app/api/v1/allowlist${since ? `?since=${since}` : ''}`;
+  const url = `https://api.zenid.app/v1/allowlist${since ? `?since=${since}` : ''}`;
   const { entries } = await fetch(url, {
     headers: { Authorization: `Bearer ${process.env.ZENID_KEY}` },
   }).then((r) => r.json());

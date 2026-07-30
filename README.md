@@ -60,7 +60,7 @@ your `return` URL when it is done.
 **2. Ask us about the address**
 
 ```bash
-curl https://zenid.app/api/v1/status?address=0x9ccD05763D3b3C49eA1daF33392eA9C3E5fA9c4A \
+curl https://api.zenid.app/v1/status?address=0x9ccD05763D3b3C49eA1daF33392eA9C3E5fA9c4A \
   -H "Authorization: Bearer zen_live_..."
 ```
 
