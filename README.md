@@ -44,6 +44,53 @@ We never see credentials. We never store the account id. You never touch either.
 
 ---
 
+## Where this is used
+
+Anywhere one person can create a thousand identities and profit from it.
+
+**Airdrops.** The obvious one. Farmers run hundreds of wallets and take the
+share meant for your community. Gate the claim on a verified slot and their
+budget becomes one KYC-verified exchange account per wallet.
+
+**Quest and points campaigns.** Galxe, Zealy, Layer3 style programs are farmed
+at industrial scale. The points you pay for engagement mostly buy scripts.
+
+**NFT mints and allowlists.** A bot army takes the supply in the first block and
+your actual community pays secondary prices.
+
+**Testnet incentive programs.** You pay for usage signal and receive noise, then
+have to guess afterwards who was real.
+
+**Retroactive funding and grants.** Quadratic matching only works if one person
+means one voice. A handful of sybils redirects the whole matching pool.
+
+**Governance.** One person one vote instead of one token one vote, for anything
+where wealth should not decide alone.
+
+**Faucets and rate limits.** Any free resource where creating a new identity
+costs nothing to abuse.
+
+**Discord and community roles.** A Verified Human role that a bot cannot obtain.
+
+**Undercollateralized lending.** Lending below full collateral requires knowing
+the borrower is one person and not a fresh wallet. This is the identity half of
+that problem.
+
+## Where this does not help
+
+Worth saying plainly so you do not waste your time.
+
+It proves **personhood, not honesty**. A verified person can still behave badly,
+they just cannot do it a thousand times in parallel.
+
+It does not prove **wealth, skill or history**. Only that a KYC-verified account
+stands behind the address.
+
+It does not stop someone verifying a wallet for a friend. No system does. What it
+does is make every fake slot cost a real KYC-verified exchange account.
+
+---
+
 ## Integrating
 
 Three steps.
