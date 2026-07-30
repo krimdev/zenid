@@ -1,7 +1,10 @@
 # ZENID
 
-**One allowlist slot per person.** ZENID lets your users prove they hold a
-KYC-verified account on a major exchange, and gives you back a yes or a no.
+**One slot per person.** ZENID lets your users prove they hold a KYC-verified
+account on a major exchange, and gives you back a yes or a no.
+
+Use it anywhere one person should count once: airdrops, quest campaigns, mints,
+governance, grants, community roles.
 
 You never receive a name, a document, or an account number. You receive a boolean
 and a proof reference you can check yourself.
@@ -14,10 +17,19 @@ and a proof reference you can check yourself.
 
 ## The problem
 
-An airdrop with 40,000 claimants usually has 4,000 humans behind it. Farmers run
-hundreds of wallets each and take the share meant for your community.
+In crypto an identity costs nothing. A wallet is a keypair, and one person can
+hold ten thousand of them.
 
-The obvious fix is KYC, and nobody wants it: your users refuse to send passports
+So every mechanism that hands something out per address gets farmed. An airdrop
+with 40,000 claimants usually has 4,000 humans behind it. A quest campaign pays
+for engagement and buys scripts. A quadratic matching pool meant to reflect a
+community gets redirected by a handful of fake ones. A mint sells its supply to a
+bot army in the first block.
+
+It is the same failure every time: **you needed one person to count once, and you
+had no way to tell.**
+
+The obvious fix is KYC, and nobody wants it. Your users refuse to send passports
 to a random protocol, and you do not want to hold identity documents you are then
 legally responsible for.
 
