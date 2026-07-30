@@ -6,9 +6,9 @@ KYC-verified account on a major exchange, and gives you back a yes or a no.
 You never receive a name, a document, or an account number. You receive a boolean
 and a proof reference you can check yourself.
 
-- **Site** — [zenid.app](https://zenid.app)
-- **Attestations** — [Primus zkTLS](https://primuslabs.xyz), settled on Base
-- **This repo** — integration docs only. The service itself is closed source.
+- **Site**: [zenid.app](https://zenid.app)
+- **Attestations**: [Primus zkTLS](https://primuslabs.xyz), settled on Base
+- **This repo**: integration docs only. The service itself is closed source.
 
 ---
 
@@ -23,7 +23,7 @@ legally responsible for.
 
 ## What ZENID does instead
 
-Your users already passed KYC — at Binance, at OKX. ZENID proves that fact
+Your users already passed KYC, at Binance, at OKX. ZENID proves that fact
 without moving the underlying data.
 
 The user's browser opens a verified session with their exchange. A cryptographic
@@ -38,8 +38,8 @@ We never see credentials. We never store the account id. You never touch either.
 | | |
 | --- | --- |
 | One person | One slot, whatever wallet they try next |
-| Your data liability | Zero — no identity ever reaches you |
-| User cost | Zero — no gas, no transaction, no fee |
+| Your data liability | Zero, no identity ever reaches you |
+| User cost | Zero, no gas, no transaction, no fee |
 | Verification time | About 30 seconds |
 
 ---
@@ -48,7 +48,7 @@ We never see credentials. We never store the account id. You never touch either.
 
 Three steps.
 
-**1 — Send your user to ZENID**
+**1. Send your user to ZENID**
 
 ```
 https://zenid.app/?ref=YOUR_PLATFORM_ID&return=https://yourapp.com/verified
@@ -57,7 +57,7 @@ https://zenid.app/?ref=YOUR_PLATFORM_ID&return=https://yourapp.com/verified
 They pick their exchange, connect their wallet, and verify. We bring them back to
 your `return` URL when it is done.
 
-**2 — Ask us about the address**
+**2. Ask us about the address**
 
 ```bash
 curl https://zenid.app/api/v1/status?address=0x9ccD05763D3b3C49eA1daF33392eA9C3E5fA9c4A \
@@ -75,7 +75,7 @@ curl https://zenid.app/api/v1/status?address=0x9ccD05763D3b3C49eA1daF33392eA9C3E
 }
 ```
 
-**3 — Gate on `verified`**
+**3. Gate on `verified`**
 
 That is the whole integration. Full reference in [docs/api.md](docs/api.md).
 
@@ -116,8 +116,8 @@ Open an issue on this repo, or email **hello@zenid.app**, with:
 - what you are gating (airdrop, allowlist, governance, something else)
 - rough number of users you expect to verify
 
-You get a `zen_live_…` key back. It is shown once and stored only as a hash, so
-save it when you receive it — we cannot recover it, only replace it.
+You get a `zen_live_...` key back. It is shown once and stored only as a hash, so
+save it when you receive it, we cannot recover it, only replace it.
 
 ---
 
@@ -129,7 +129,7 @@ laptop.
 
 **Two exchanges today.** Binance and OKX. A user with accounts on both could take
 two slots with two wallets. Restrict a campaign to a single exchange if that
-matters to you — see [docs/api.md](docs/api.md).
+matters to you, see [docs/api.md](docs/api.md).
 
 **Lending is possible.** A verified person can verify a friend's wallet. No
 verification system solves this, ours included. What it does is make each fake
@@ -140,6 +140,6 @@ trace linking that account to the wallet.
 
 ## Docs
 
-- [docs/api.md](docs/api.md) — endpoints, errors, rate limits
-- [docs/flow.md](docs/flow.md) — what happens during a verification, step by step
-- [docs/privacy.md](docs/privacy.md) — exactly what is stored and what is not
+- [docs/api.md](docs/api.md): endpoints, errors, rate limits
+- [docs/flow.md](docs/flow.md): what happens during a verification, step by step
+- [docs/privacy.md](docs/privacy.md): exactly what is stored and what is not

@@ -8,7 +8,7 @@ All endpoints under `/api/v1/` require a bearer token.
 Authorization: Bearer zen_live_...
 ```
 
-Requests without a valid key get `401`. Keys are hashed at rest — if you lose
+Requests without a valid key get `401`. Keys are hashed at rest. If you lose
 yours we issue a new one, we cannot read the old one back.
 
 ---
@@ -120,7 +120,7 @@ Errors always carry a JSON body:
 
 ## Rate limits
 
-600 requests per minute per key. Ask if you need more — the limit exists to catch
+600 requests per minute per key. Ask if you need more. The limit exists to catch
 runaway loops, not to meter you.
 
 `GET /api/v1/allowlist` with `since` costs one request whatever the row count, so

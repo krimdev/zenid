@@ -20,7 +20,7 @@ reference. Nothing else.
 That is a real row. There is no other table.
 
 The `fingerprint` is `HMAC-SHA256(secret_salt, account_id)`. It exists to notice
-that the same exchange account came back with a different wallet — nothing more.
+that the same exchange account came back with a different wallet, nothing more.
 It cannot be reversed, and without the salt it cannot be brute-forced either,
 which matters because account ids are short and guessable.
 
@@ -40,7 +40,7 @@ mechanism by which anything else could reach us.
 A boolean, which exchange, when, and a `taskId`.
 
 You cannot obtain the account id, the fingerprint, or anything about the person
-through the API. It is not a permission setting — the data is not there.
+through the API. It is not a permission setting. The data is not there.
 
 ## What is public on Base
 
@@ -52,7 +52,7 @@ account id, the wallet address, and the attestor's signature.
 
 **So the link between an exchange account id and a wallet address is public.**
 
-The id is a pseudonymous number — `48372910`, not a name — and reading it tells
+The id is a pseudonymous number (`48372910`, not a name) and reading it tells
 you nothing about who that person is unless you already work at the exchange. But
 it is permanent and it cannot be deleted afterwards, and users deserve to know
 that before they start rather than after.
@@ -64,7 +64,7 @@ answers without trusting us.
 
 Ask and we remove your row from the allowlist, which frees the slot.
 
-We cannot remove the on-chain attestation. Nobody can — that is what a blockchain
+We cannot remove the on-chain attestation. Nobody can. That is what a blockchain
 is. This is worth saying plainly rather than promising a deletion we cannot
 perform.
 
