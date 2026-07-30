@@ -110,7 +110,16 @@ No other verification provider lets you do this.
 
 Keys are issued manually while ZENID is in early access.
 
-Open an issue on this repo, or email **hello@zenid.app**, with:
+Reach out on any of these:
+
+| | |
+| --- | --- |
+| Issue | Open one on this repo |
+| X | [@krimdevnode](https://x.com/krimdevnode) |
+| Discord | `niceone1809` |
+| Email | `contact@zenid.app` |
+
+Tell us:
 
 - your platform or protocol name
 - what you are gating (airdrop, allowlist, governance, something else)
