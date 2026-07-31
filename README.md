@@ -3,6 +3,11 @@
 **One slot per person.** ZENID lets your users prove they hold a KYC-verified
 account on a major exchange, and gives you back a yes or a no.
 
+The proof is produced with [Primus zkTLS](https://primuslabs.xyz). The exchange
+response is proven straight from the encrypted TLS session, signed by an
+independent attestor running in a TEE, and settled on Base. Nothing is
+self-reported, and we could not forge it if we wanted to.
+
 Use it anywhere one person should count once: airdrops, quest campaigns, mints,
 governance, grants, community roles.
 
