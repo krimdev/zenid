@@ -4,9 +4,9 @@
 account on a major exchange, and gives you back a yes or a no.
 
 The proof is produced with [Primus zkTLS](https://primuslabs.xyz). The exchange
-response is proven straight from the encrypted TLS session, signed by an
-independent attestor running in a TEE, and settled on Base. Nothing is
-self-reported, and we could not forge it if we wanted to.
+response is proven straight from the encrypted TLS session and signed by an
+independent attestor running in a TEE. Nothing is self-reported, and we could not
+forge it if we wanted to.
 
 Use it anywhere one person should count once: airdrops, quest campaigns, mints,
 governance, grants, community roles.
@@ -15,7 +15,7 @@ You never receive a name, a document, or an account number. You receive a boolea
 and a proof reference you can check yourself.
 
 - **Site**: [zenid.app](https://zenid.app)
-- **Attestations**: [Primus zkTLS](https://primuslabs.xyz), settled on Base
+- **Attestations**: [Primus zkTLS](https://primuslabs.xyz)
 - **This repo**: integration docs only. The service itself is closed source.
 
 ---
@@ -134,8 +134,7 @@ curl https://api.zenid.app/v1/status?address=0x9ccD05763D3b3C49eA1daF33392eA9C3E
   "verified": true,
   "source": "binance",
   "verifiedAt": "2026-07-30T16:45:20.349Z",
-  "taskId": "0x1d44051166388ce2f92ac83a95d4313614c5ed65f7979b2c1ba6dbc8c0a78f65",
-  "chainId": 8453
+  "proof": "0x09ec954208a3291ca8aa5d18b984efb352fce1c648f33610fc5824cb39da12d0..."
 }
 ```
 
@@ -147,21 +146,21 @@ That is the whole integration. Full reference in [docs/api.md](docs/api.md).
 
 ## Don't trust us
 
-Every response carries a `taskId`. That is a real task on the Primus task
-contract on Base, holding the attestation, the attestor that signed it, and its
-timestamp.
+Every verified response carries a `proof`. That is the signature an independent
+Primus attestor put on the exchange response, and it is checkable without us.
 
-Read it yourself:
+Ask us for the full attestation and verify the signature yourself, either with
+the Primus SDK or on chain through their verifier contract:
 
-```js
-const task = new ethers.Contract(
-  '0x151cb5eD5D10A42B607bB172B27BDF6F884b9707',
-  ['function queryTask(bytes32) view returns (tuple(string templateId, address submitter, address[] attestors, tuple(address attestor, bytes32 taskId, tuple(address recipient, tuple(string url, string header, string method, string body)[] request, tuple(tuple(string keyName, string parseType, string parsePath)[] oneUrlResponseResolve)[] responseResolve, string data, string attConditions, uint64 timestamp, string additionParams) attestation)[] taskResults, uint64 submittedAt, uint8 tokenSymbol, address callback, uint8 taskStatus))'],
-  provider,
-);
-
-const info = await task.queryTask(taskId);
+```solidity
+IPrimusZKTLS(primus).verifyAttestation(attestation);
 ```
+
+The attestor is selected by Primus, runs inside a TEE, and has no relationship
+with us. We cannot produce that signature, and neither can the exchange account
+holder. If our answer and the signature disagree, the signature is right.
+
+No other verification provider lets you check their work like this.
 
 You will find the exchange endpoint that was queried, the attestor's address, and
 the KYC level returned. If our answer and the chain disagree, the chain is right.

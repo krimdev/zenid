@@ -12,7 +12,7 @@ reference. Nothing else.
   "fingerprint": "e55e97d2890aeac52cea13950559b97a95f121c31b0fe809ba3b3029db1204f2",
   "address": "0x9ccD05763D3b3C49eA1daF33392eA9C3E5fA9c4A",
   "source": "binance",
-  "taskId": "0x1d44051166388ce2f92ac83a95d4313614c5ed65f7979b2c1ba6dbc8c0a78f65",
+  "proof": "0x09ec954208a3291ca8aa5d18b984efb352fce1c648f33610fc5824cb39da12d0...",
   "at": "2026-07-30T16:45:20.349Z"
 }
 ```
@@ -37,36 +37,31 @@ mechanism by which anything else could reach us.
 
 ## What you receive as a platform
 
-A boolean, which exchange, when, and a `taskId`.
+A boolean, which exchange, when, and the attestor signature.
 
 You cannot obtain the account id, the fingerprint, or anything about the person
 through the API. It is not a permission setting. The data is not there.
 
-## What is public on Base
+## Nothing is published on chain
 
-The attestation is reported on-chain, permanently, by design. That is what makes
-it independently checkable.
+The attestation is signed by the attestor and handed to us. It is never written
+to a public ledger.
 
-It contains the exchange endpoint that was queried, the KYC level, the exchange
-account id, the wallet address, and the attestor's signature.
+So the exchange account id never becomes public, and the link between an exchange
+account and a wallet address stays between the attestor and us. We reduce it to a
+salted fingerprint the moment we receive it.
 
-**So the link between an exchange account id and a wallet address is public.**
+This is a change from an earlier design where every attestation was reported
+on-chain. It made verification easy but published the account id forever, which
+was too high a price.
 
-The id is a pseudonymous number (`48372910`, not a name) and reading it tells
-you nothing about who that person is unless you already work at the exchange. But
-it is permanent and it cannot be deleted afterwards, and users deserve to know
-that before they start rather than after.
-
-We chose this deliberately: it is the same property that lets you verify our
-answers without trusting us.
+Verifiability did not suffer. The attestor signature is still checkable by anyone
+we hand the attestation to, with the Primus SDK or their verifier contract.
 
 ## Deletion
 
-Ask and we remove your row from the allowlist, which frees the slot.
-
-We cannot remove the on-chain attestation. Nobody can. That is what a blockchain
-is. This is worth saying plainly rather than promising a deletion we cannot
-perform.
+Ask and we remove your row from the allowlist, which frees the slot. There is
+nothing else to delete, and nothing outside our control that would survive it.
 
 ## Salt rotation
 

@@ -32,8 +32,7 @@ curl 'https://api.zenid.app/v1/status?address=0x9ccD0576...' \
   "verified": true,
   "source": "binance",
   "verifiedAt": "2026-07-30T16:45:20.349Z",
-  "taskId": "0x1d44051166388ce2f92ac83a95d4313614c5ed65f7979b2c1ba6dbc8c0a78f65",
-  "chainId": 8453
+  "proof": "0x09ec954208a3291ca8aa5d18b984efb352fce1c648f33610fc5824cb39da12d0..."
 }
 ```
 
@@ -42,13 +41,12 @@ curl 'https://api.zenid.app/v1/status?address=0x9ccD0576...' \
 | `verified` | The only field you need to gate on |
 | `source` | `binance` or `okx`, `null` if unverified |
 | `verifiedAt` | ISO 8601, `null` if unverified |
-| `taskId` | Attestation on the Primus task contract. Check it yourself |
-| `chainId` | `8453` Base, `84532` Base Sepolia |
+| `proof` | The attestor signature on the attestation. Check it yourself |
 
 An unverified address is not an error:
 
 ```json
-{ "address": "0x2222...", "verified": false, "source": null, "verifiedAt": null, "taskId": null, "chainId": 8453 }
+{ "address": "0x2222...", "verified": false, "source": null, "verifiedAt": null, "proof": null }
 ```
 
 ---
@@ -71,8 +69,8 @@ curl 'https://api.zenid.app/v1/allowlist?since=2026-07-01T00:00:00Z' \
 {
   "count": 2,
   "entries": [
-    { "address": "0x9ccD0576...", "source": "binance", "verifiedAt": "2026-07-30T16:45:20.349Z", "taskId": "0x1d4405..." },
-    { "address": "0x7F58Bd09...", "source": "okx",     "verifiedAt": "2026-07-30T18:02:11.882Z", "taskId": "0xa9948e..." }
+    { "address": "0x9ccD0576...", "source": "binance", "verifiedAt": "2026-07-30T16:45:20.349Z", "proof": "0x09ec95..." },
+    { "address": "0x7F58Bd09...", "source": "okx",     "verifiedAt": "2026-07-30T18:02:11.882Z", "proof": "0x7b1023..." }
   ]
 }
 ```

@@ -22,20 +22,24 @@ it works on any chain their wallet happens to be on.
 Without it anyone could allowlist a wallet they do not control and burn its
 eligibility.
 
-### 3. ZENID pays for the attestation
+### 3. ZENID signs the request
 
-We submit and fund the verification task on Base ourselves.
+Our server builds the verification request and signs it with our Primus
+credentials, then hands the browser the signed result.
 
-This is the reason your users need no ETH and no wallet balance. Most of them
-would drop out at that step, so we absorb it.
+The browser never decides what gets attested. It cannot change the exchange, the
+template or the conditions, because it only ever receives something already
+signed.
+
+There is no transaction and no fee at this step, which is why your users need no
+ETH and no wallet balance.
 
 ### 4. zkTLS reads the KYC status
 
 The Primus browser extension opens a session with the exchange and produces a
 cryptographic proof of the response, taken from the encrypted TLS transcript.
 
-An attestor, selected at random and running inside a Phala TEE, signs the result
-and reports it to the Primus task contract on Base.
+An attestor, selected by Primus and running inside a TEE, signs the result.
 
 Three things worth being precise about:
 
@@ -45,13 +49,13 @@ Three things worth being precise about:
 
 ### 5. The slot is recorded
 
-Our server ignores whatever the browser claims and reads the attestation back
-from the chain, then checks that:
+Our server verifies the attestation itself rather than trusting the browser, and
+checks that:
 
-- the task was one we paid for
-- it used the expected template
+- the attestor signature is valid
 - it was issued to the address being claimed
-- an attestor actually reported a result
+- it answers a request we signed, through a single use nonce
+- the attestation is recent enough that an old one cannot be replayed
 - the KYC level clears the threshold
 
 Only then does the account id get hashed with `HMAC-SHA256` under a secret salt.
