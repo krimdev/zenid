@@ -162,11 +162,6 @@ holder. If our answer and the signature disagree, the signature is right.
 
 No other verification provider lets you check their work like this.
 
-You will find the exchange endpoint that was queried, the attestor's address, and
-the KYC level returned. If our answer and the chain disagree, the chain is right.
-
-No other verification provider lets you do this.
-
 ---
 
 ## Getting an API key
