@@ -30,7 +30,8 @@ curl 'https://api.zenid.app/v1/status?address=0x9ccD0576...' \
 {
   "address": "0x9ccD05763D3b3C49eA1daF33392eA9C3E5fA9c4A",
   "verified": true,
-  "source": "binance",
+  "source": "okx",
+  "level": 2,
   "verifiedAt": "2026-07-30T16:45:20.349Z",
   "proof": "0x09ec954208a3291ca8aa5d18b984efb352fce1c648f33610fc5824cb39da12d0..."
 }
@@ -40,14 +41,29 @@ curl 'https://api.zenid.app/v1/status?address=0x9ccD0576...' \
 | --- | --- |
 | `verified` | The only field you need to gate on |
 | `source` | `binance` or `okx`, `null` if unverified |
+| `level` | OKX verification level, `2` or `3`. Always `null` for Binance |
 | `verifiedAt` | ISO 8601, `null` if unverified |
 | `proof` | The attestor signature on the attestation. Check it yourself |
 
 An unverified address is not an error:
 
 ```json
-{ "address": "0x2222...", "verified": false, "source": null, "verifiedAt": null, "proof": null }
+{ "address": "0x2222...", "verified": false, "source": null, "level": null, "verifiedAt": null, "proof": null }
 ```
+
+### Raising the bar
+
+`verified` already means document-checked identity. OKX levels 0 and 1 never
+enter the allowlist, and Binance is accepted only at its `ADVANCED` tier.
+
+If you want more than that, `level` lets you require OKX level 3:
+
+```js
+const ok = res.verified && (res.source === 'binance' || res.level >= 3);
+```
+
+Binance has no numeric scale of its own, so it reports `null`. Treat it on its
+own terms rather than comparing it to the OKX numbers.
 
 ---
 
@@ -69,8 +85,8 @@ curl 'https://api.zenid.app/v1/allowlist?since=2026-07-01T00:00:00Z' \
 {
   "count": 2,
   "entries": [
-    { "address": "0x9ccD0576...", "source": "binance", "verifiedAt": "2026-07-30T16:45:20.349Z", "proof": "0x09ec95..." },
-    { "address": "0x7F58Bd09...", "source": "okx",     "verifiedAt": "2026-07-30T18:02:11.882Z", "proof": "0x7b1023..." }
+    { "address": "0x9ccD0576...", "source": "binance", "level": null, "verifiedAt": "2026-07-30T16:45:20.349Z", "proof": "0x09ec95..." },
+    { "address": "0x7F58Bd09...", "source": "okx",     "level": 2,    "verifiedAt": "2026-07-30T18:02:11.882Z", "proof": "0x7b1023..." }
   ]
 }
 ```

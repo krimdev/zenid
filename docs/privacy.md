@@ -11,7 +11,8 @@ reference. Nothing else.
 {
   "fingerprint": "e55e97d2890aeac52cea13950559b97a95f121c31b0fe809ba3b3029db1204f2",
   "address": "0x9ccD05763D3b3C49eA1daF33392eA9C3E5fA9c4A",
-  "source": "binance",
+  "source": "okx",
+  "level": 2,
   "proof": "0x09ec954208a3291ca8aa5d18b984efb352fce1c648f33610fc5824cb39da12d0...",
   "at": "2026-07-30T16:45:20.349Z"
 }
@@ -23,6 +24,11 @@ The `fingerprint` is `HMAC-SHA256(secret_salt, account_id)`. It exists to notice
 that the same exchange account came back with a different wallet, nothing more.
 It cannot be reversed, and without the salt it cannot be brute-forced either,
 which matters because account ids are short and guessable.
+
+The `level` is the verification tier the exchange reported, kept so a platform
+can ask for more than our own threshold. It is a small integer on OKX and `null`
+on Binance, which publishes no numeric scale. It says nothing about the person
+beyond how far they went through their exchange's own checks.
 
 ## What we never receive
 

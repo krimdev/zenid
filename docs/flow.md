@@ -6,11 +6,15 @@ Roughly thirty seconds, five steps. The user signs one message and pays nothing.
 
 ### 1. The user picks an exchange
 
-Binance or OKX. They need an account that passed **KYC level 2**, meaning
-document verification, not just a confirmed email.
+Binance or OKX. In both cases the account must have passed **document
+verification**, not just a confirmed email.
 
-Level 1 is a name and a date of birth and can be opened in bulk, so it is
-rejected. This threshold is why a slot is worth something.
+Each exchange reports that differently, so we follow their own field rather than
+inventing a common scale. On OKX the level must be 2 or 3, since level 1 is a
+name and a date of birth and can be opened in bulk. On Binance the account must
+report a passed KYC at the `ADVANCED` tier.
+
+This threshold is why a slot is worth something.
 
 ### 2. The user proves the wallet
 
