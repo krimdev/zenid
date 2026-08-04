@@ -112,19 +112,20 @@ does is make every fake slot cost a real KYC-verified exchange account.
 
 Three steps.
 
-**1. Send your user to ZENID**
+**1. Point your users at [zenid.app](https://zenid.app)**
 
-```
-https://zenid.app/?ref=YOUR_PLATFORM_ID&return=https://yourapp.com/verified
-```
+They pick their exchange, connect the wallet they intend to use with you, and
+verify. It takes about 30 seconds and costs them nothing. Someone who verified
+before does not start over, they open Your verification, sign, and see their
+existing slot.
 
-They pick their exchange, connect their wallet, and verify. We bring them back to
-your `return` URL when it is done.
+The wallet they verify is the wallet you will be asking us about, so tell them
+which one to connect.
 
 **2. Ask us about the address**
 
 ```bash
-curl https://api.zenid.app/v1/status?address=0x9ccD05763D3b3C49eA1daF33392eA9C3E5fA9c4A \
+curl 'https://api.zenid.app/v1/status?address=0x9ccD05763D3b3C49eA1daF33392eA9C3E5fA9c4A' \
   -H "Authorization: Bearer zen_live_..."
 ```
 
@@ -132,15 +133,24 @@ curl https://api.zenid.app/v1/status?address=0x9ccD05763D3b3C49eA1daF33392eA9C3E
 {
   "address": "0x9ccD05763D3b3C49eA1daF33392eA9C3E5fA9c4A",
   "verified": true,
-  "source": "binance",
+  "source": "okx",
+  "level": 2,
   "verifiedAt": "2026-07-30T16:45:20.349Z",
   "proof": "0x09ec954208a3291ca8aa5d18b984efb352fce1c648f33610fc5824cb39da12d0..."
 }
 ```
 
+Poll it when a user claims, or sync in bulk with `GET /v1/allowlist?since=...`
+and keep your own copy. Both are in [docs/api.md](docs/api.md).
+
 **3. Gate on `verified`**
 
-That is the whole integration. Full reference in [docs/api.md](docs/api.md).
+That is the whole integration. One request, one boolean.
+
+There is no redirect handshake today. Your users go to zenid.app, come back on
+their own, and you ask us. If you want them handed straight back to a URL of
+yours once they are done, say so when you ask for a key and we will wire it to
+your domain rather than accepting an arbitrary one.
 
 ---
 
