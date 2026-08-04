@@ -15,6 +15,7 @@ You never receive a name, a document, or an account number. You receive a boolea
 and a proof reference you can check yourself.
 
 - **Site**: [zenid.app](https://zenid.app)
+- **Live demo**: [zenlive.xyz](https://zenlive.xyz), a fake airdrop showing every API call
 - **Attestations**: [Primus zkTLS](https://primuslabs.xyz)
 - **This repo**: integration docs only. The service itself is closed source.
 
@@ -112,12 +113,24 @@ does is make every fake slot cost a real KYC-verified exchange account.
 
 Three steps.
 
-**1. Point your users at [zenid.app](https://zenid.app)**
+**1. Send your users to verify**
+
+```
+https://zenid.app/?p=YOUR_PLATFORM_ID
+```
 
 They pick their exchange, connect the wallet they intend to use with you, and
 verify. It takes about 30 seconds and costs them nothing. Someone who verified
 before does not start over, they open Your verification, sign, and see their
 existing slot.
+
+Your platform id makes the page say who it is verifying for, and puts a button
+at the end that sends them back to you, whether they were verified or refused.
+That button uses the return URL registered with your key, never a URL from the
+link, so nobody can turn zenid.app into an open redirect. Tell us your URL when
+you ask for a key.
+
+Plain `https://zenid.app` works too. You just lose the return trip.
 
 The wallet they verify is the wallet you will be asking us about, so tell them
 which one to connect.
@@ -147,10 +160,18 @@ and keep your own copy. Both are in [docs/api.md](docs/api.md).
 
 That is the whole integration. One request, one boolean.
 
-There is no redirect handshake today. Your users go to zenid.app, come back on
-their own, and you ask us. If you want them handed straight back to a URL of
-yours once they are done, say so when you ask for a key and we will wire it to
-your domain rather than accepting an arbitrary one.
+## See it running first
+
+[zenlive.xyz](https://zenlive.xyz) is a demo platform we run against this API. A
+fake airdrop, one claim per person, gated exactly the way yours would be.
+
+It prints **every request on screen**, both the browser talking to the demo and
+the demo calling this API, with the responses in full and only the key masked.
+So you can read the integration before writing it.
+
+Do the interesting part while you are there. Verify one wallet, claim, then try a
+second wallet with the same exchange account. It gets refused, and you can watch
+the refusal arrive as a plain API answer.
 
 ---
 

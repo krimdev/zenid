@@ -115,6 +115,23 @@ You lose the users who only have OKX. Your call.
 
 ---
 
+## Sending users over, and getting them back
+
+```
+https://zenid.app/?p=YOUR_PLATFORM_ID
+```
+
+The page then names you while they verify, and offers a button back to you once
+they are done, on success and on refusal alike. The destination is the return URL
+recorded against your key, so it cannot be set from the link. Give us that URL
+when you ask for a key.
+
+The user arrives back at `YOUR_RETURN_URL?address=0x...`. Treat that address as a
+hint, not as proof: query `/v1/status` before granting anything, exactly as
+[zenlive.xyz](https://zenlive.xyz) does.
+
+---
+
 ## Errors
 
 | Status | |
