@@ -64,6 +64,19 @@ was too high a price.
 Verifiability did not suffer. The attestor signature is still checkable by anyone
 we hand the attestation to, with the Primus SDK or their verifier contract.
 
+## The attestation itself
+
+We never store it. It reaches our server, gets checked, and is dropped. Keeping
+it would mean keeping the account id, which is the one thing this design refuses
+to do.
+
+The user can download it at the end of their verification, straight from the
+browser. They hold the only copy, and they decide who ever sees it. They can
+also download a receipt with no account id in it, safe to hand around.
+
+One consequence worth stating: if a user loses their attestation, nobody can
+reissue it. They would have to verify again.
+
 ## Deletion
 
 Ask and we remove your row from the allowlist, which frees the slot. There is

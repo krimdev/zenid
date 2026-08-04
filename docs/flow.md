@@ -68,6 +68,9 @@ We keep the fingerprint and the address. The id itself is never written down.
 A second wallet presenting the same account produces the same fingerprint and is
 refused.
 
+The attestation is dropped once checked. Before it goes, the user can download
+it, along with a receipt that carries no account id. We keep neither.
+
 ---
 
 ## Why the browser extension

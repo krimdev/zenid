@@ -149,12 +149,20 @@ That is the whole integration. Full reference in [docs/api.md](docs/api.md).
 Every verified response carries a `proof`. That is the signature an independent
 Primus attestor put on the exchange response, and it is checkable without us.
 
-Ask us for the full attestation and verify the signature yourself, either with
-the Primus SDK or on chain through their verifier contract:
+We cannot hand you the signed payload, because it contains the exchange account
+id and we deliberately never keep it. **The user does.** At the end of a
+verification they can download their full attestation, and they can pass it to
+you if they choose to. Then verify it yourself, with the Primus SDK or on chain
+through their verifier contract:
 
 ```solidity
 IPrimusZKTLS(primus).verifyAttestation(attestation);
 ```
+
+Users can also download a receipt, which holds the address, the source, the date
+and the attestor signature, but no account id. It is a record, not a proof:
+without the signed payload the signature cannot be recomputed. If you need to
+check the work, ask for the attestation, not the receipt.
 
 The attestor is selected by Primus, runs inside a TEE, and has no relationship
 with us. We cannot produce that signature, and neither can the exchange account
